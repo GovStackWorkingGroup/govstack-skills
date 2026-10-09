@@ -1,0 +1,8 @@
+{
+  "name": "govstack",
+  "description": "Skills for working on GovStack specifications: the domain model behind Building Blocks, the mechanics of authoring and releasing a BB spec, and the shared requirements/naming conventions the specs are validated against.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ali G."
+  }
+}

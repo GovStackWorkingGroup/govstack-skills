@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "govstack-skills",
+  "description": "Local marketplace for the GovStack specification-authoring skills.",
+  "owner": {
+    "name": "Ali G."
+  },
+  "plugins": [
+    {
+      "name": "govstack",
+      "description": "Skills for working on GovStack specifications: domain model, spec-authoring mechanics, and shared requirements/naming conventions.",
+      "source": "./",
+      "category": "documentation"
+    }
+  ]
+}
