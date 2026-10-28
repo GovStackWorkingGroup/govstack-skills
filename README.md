@@ -13,7 +13,7 @@ skills/
   spec-mechanics/                   # procedure: repo layout, normalization, releases
 shared/
   corpus-map.md                     # where the GovStack corpus lives; which copies are stale
-  requirements-model.md             # FR/CFR, identifiers, the three classifier dimensions
+  requirements-model.md             # capabilities, functionalities, core/extensions, identifiers, classifiers, form
   naming-and-versioning.md          # govstack-[type]-[name], URNs, semver, extension rules
 ```
 

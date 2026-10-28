@@ -4,6 +4,8 @@
 > It is being rewritten. Do not cite it, do not apply its rules, and do not use it to
 > validate or normalize a spec. Ask the user for the current rules instead.
 > Remove this banner when the rewrite lands.
+>
+> For **versioning**, read `specification-framework/chapters/versioning_and_change_documentation.md` instead (draft). For requirement identifiers, read `specification-framework/chapters/requirements.md`, *Unique identifier*. Naming of specifications and extensions is still under revision.
 
 
 Shared by every skill that references a spec, a requirement, or a release. Authoritative

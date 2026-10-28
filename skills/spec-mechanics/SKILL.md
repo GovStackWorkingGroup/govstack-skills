@@ -21,7 +21,7 @@ at stale copies.
 | Clean up a repo that doesn't match | `references/normalization.md` |
 | `index.yml`, version bumps, cutting a release | `references/release-process.md` |
 | Identifiers, URNs, semver rules | `${CLAUDE_PLUGIN_ROOT}/shared/naming-and-versioning.md` |
-| Requirement classifiers and form | `${CLAUDE_PLUGIN_ROOT}/shared/requirements-model.md` |
+| Functionality files, `metadata.yml` capabilities and extensions, requirement classifiers and form | `${CLAUDE_PLUGIN_ROOT}/shared/requirements-model.md` |
 
 ## Standard workflows
 
@@ -43,5 +43,4 @@ normalizing a repo.
 
 ## The rule that breaks compliance
 
-Any change to a requirement's classifiers or intent requires a spec version bump. Renaming
-a Key Functionality means updating every `KF:` link that references it.
+Any change to a requirement's classifiers or intent requires a spec version bump; `specification-framework/chapters/versioning_and_change_documentation.md`, *Classifier changes*, says which release. A functionality's title must match the overview's *Functionalities* table, and its `realises` and `extension` ids must be declared in `metadata.yml`. Moving a functionality between the core and an extension is a major release.

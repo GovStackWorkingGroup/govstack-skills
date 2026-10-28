@@ -22,12 +22,15 @@ published URL when the claim concerns released content rather than work in progr
 
 The CFR/Architecture is being split into newer repos. The split-out repos will contain updated information as follows:
 
-- `specification-framework/chapters/requirements_model.md` supersedes `5.3-requirements-model.md`
-- `specification-framework/chapters/crafting_well_formed_requirements.md` — no equivalent in
-  the old chapter 5; the reference for requirement wording quality
-- `specification-framework/chapters/specifications_scope.md` supersedes `5.1-specification-scope.md`
-- `govstack-process/chapters/govstack_working_groups.md`, `publication_tracks.md`,
-  `govstack_namespaces.md` 
+- `specification-framework/chapters/requirements.md` supersedes `5.3-requirements-model.md`. It holds what a requirement is, statement wording (the former `crafting_well_formed_requirements.md`), identifiers, the classifiers including `status` and `interaction`, and the front-matter form
+- `specification-framework/chapters/functionalities_and_extensions.md`: capabilities, functionalities, core and extensions. No equivalent in the old chapter 5
+- `specification-framework/chapters/structure_of_specifications.md`: repository outline, `metadata.yml` blocks, and the functionality file template
+- `specification-framework/chapters/introductory_chapters.md`: overview and scope, superseding `5.1-specification-scope.md` (the former `specifications_scope.md`)
+- `specification-framework/chapters/versioning_and_change_documentation.md`: release types, including which release each classifier, interface and extension change needs
+- `specification-framework/ADR/`: the decision records behind these chapters (ARCH-ADR-5 status/level, ARCH-ADR-7 core and extensions, ARCH-TDR-1 capabilities). All proposed, none decided yet
+- `govstack-process/chapters/govstack_working_groups.md`, `publication_tracks.md`, `govstack_namespaces.md`
+
+Inside `specification-framework/`, `research/` is internal working material. Never cite it or point readers to it; the chapters above are the sources.
 
 ## Stale copies or non-relevant folders — do not read these
 

@@ -226,6 +226,18 @@ teeth: to be listed, a solution must meet **100% of REQUIRED requirements** of b
 compliance percentage shown to buyers. This is why a requirement's classifiers are
 normative metadata and not editorial garnish.
 
+Under the proposed 2.0 model (ARCH-ADR-7), "the BB spec" means its **core plus the extensions the solution claims**. Requirements of unclaimed extensions are not applicable, and claimed extensions are shown as facts ("Wallet 2.0: core, Issuance, Presentation"), not as a score.
+
+## How a specification is organised
+
+Three layers, which writers routinely blur:
+
+- **Capabilities**: outcomes for beneficiaries, named in the *Purpose* for a decision-maker ("Credential Custody"). Informative; never claimed or assessed.
+- **Functionalities**: services to actors outside the BB ("Credential Intake"), one file each in `requirements/`. Each `realises` one or more capabilities, and is either **core** (every conformant solution meets it) or in a named **extension** (claimed or not, all or nothing).
+- **Requirements**: single verifiable statements whose subject is the system under test, in their functionality's front matter, each with a level, status, observability, mutability and interaction type.
+
+The core is what makes a product an instance of the BB, and must stand alone. Obligations a BB has towards a role in a Domain Reference Architecture live in the BB spec, typically as an extension, because reference architectures carry no requirements and BBs stay autonomous. Field-level detail is in `${CLAUDE_PLUGIN_ROOT}/shared/requirements-model.md`.
+
 
 ## Lookups
 
@@ -237,7 +249,7 @@ This skill is orientation. Detail lives alongside it:
 | Citable sources for a claim | `references/further-reading.md` |
 | Where the corpus lives on disk, and which copies are stale | `${CLAUDE_PLUGIN_ROOT}/shared/corpus-map.md` |
 | Naming schema, URNs, semver, extension rules | *(under revision since 2026-09-20 — `shared/naming-and-versioning.md` is not reliable; ask the user)* |
-| Requirement classifiers and form | `${CLAUDE_PLUGIN_ROOT}/shared/requirements-model.md` |
+| Capabilities, functionalities, core and extensions, requirement classifiers and form | `${CLAUDE_PLUGIN_ROOT}/shared/requirements-model.md` |
 
 When a claim matters, read the source file rather than relying on this summary — the corpus
 is under active revision.

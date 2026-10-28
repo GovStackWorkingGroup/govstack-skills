@@ -14,9 +14,7 @@ published versions and are what you should read when editing — see
 | Published specs | https://specs.govstack.global/ |
 | Strategy behind 2.0 | GovSpecs 2.0 Strategy (2025–2027) |
 
-Caveat on the requirements-model link: the model has since been split into its own repo
-(`specification-framework/chapters/requirements_model.md`), which is ahead of the published
-chapter 5. Cite the published URL, but check the repo before asserting current behaviour.
+Caveat on the requirements-model link: the model has since been split into its own repo (`specification-framework/chapters/requirements.md` and `functionalities_and_extensions.md`), which is well ahead of the published chapter 5: it adds `status` and `interaction` classifiers, capabilities, and core/extension functionalities, none of which the published chapter has. Cite the published URL for released behaviour, and the repo chapters (marked as proposals) for the 2.0 model.
 
 When a claim matters, read the source rather than relying on the `govstack-concepts`
 summary — that skill is orientation, and the corpus is under active revision.
