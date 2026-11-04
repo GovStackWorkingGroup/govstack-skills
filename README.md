@@ -10,11 +10,14 @@ A Claude Code plugin holding the skills for working on GovStack specifications.
   marketplace.json                  # lets this repo be installed as a local marketplace
 skills/
   govstack-concepts/                # knowledge: the domain model. Read before reasoning.
+  govstack-writing/                 # procedure: general GovStack Markdown documentation
+  openapi-writing/                  # procedure: human-readable OpenAPI summaries and descriptions
   spec-mechanics/                   # procedure: repo layout, normalization, releases
 shared/
   corpus-map.md                     # where the GovStack corpus lives; which copies are stale
   requirements-model.md             # capabilities, functionalities, core/extensions, identifiers, classifiers, form
   naming-and-versioning.md          # govstack-[type]-[name], URNs, semver, extension rules
+  writing-style.md                  # shared voice and register rules for documentation skills
 ```
 
 ## Install
@@ -38,7 +41,7 @@ request meant for `requirements-validator` or `specification-writer`; that is wh
 root skill became the narrower `spec-mechanics`.
 
 Write each description to say what the skill is for **and what it is not for**, with an
-explicit redirect. See the two existing skills for the pattern.
+explicit redirect. See the existing skills for the pattern.
 
 **Knowledge vs. procedure.** `govstack-concepts` explains what things mean and is read
 before reasoning about GovStack content. Everything else does a job. Procedural skills must
@@ -53,6 +56,16 @@ copy a table between skills; the copies diverge.
 carry the routing logic, the workflows, and the rules that are dangerous to get wrong —
 then point at `references/` for the detail. Lookup material (glossaries, source tables,
 checklists) belongs in `references/`, which is read only when needed.
+
+Repeatable behavioural evaluations for `openapi-writing` live in
+`tests/openapi-writing/evals.json`; they exercise the skill against text and repository inputs.
+The corresponding fixtures for `govstack-writing` live in
+`tests/govstack-writing/evals.json`.
+
+For repository cases, copy the fixture to scratch and materialise any local files declared
+in `fixture.seed_files` there. Give the evaluator the request, raw inputs, and skill without
+the assertions or allowlists. Keep evaluation outputs and review notes in scratch. The
+checks distinguish editorial and artifact preservation from rendered or runtime verification.
 
 **Never use bare relative corpus paths.** `cfr-architecture/2-common-terminology.md`
 resolves only if the cwd happens to be the corpus root. Record the location in

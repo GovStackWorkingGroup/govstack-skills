@@ -1,0 +1,146 @@
+{
+  "skill": "openapi-writing",
+  "purpose": "Repeatable behavioral evaluations of editorial clarity and contract preservation. Assertions describe meaning, not preferred wording.",
+  "method": "For an inline case, give a fresh evaluator only the request and input, plus the skill. For a fixture case, copy the complete fixture.source_dir, relative to this file, into a new scratch directory while preserving its layout. Use the fixture metadata to prepare and collect the run, but give the evaluator only the request, resulting artifact tree, and skill. Do not expose the fixture metadata, allowlisted_nodes, assertions, or a model answer. Compare parsed source and result documents with the allowlist, review every assertion, and run applicable validation. These evaluations do not establish runtime conformance.",
+  "cases": [
+    {
+      "id": "metadata-and-payload",
+      "request": "Improve the voice and wording in this OpenAPI description. Preserve the contract and example data.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Record API\n  version: 1.0.0\npaths:\n  /records:\n    get:\n      operationId: listRecords\n      summary: This endpoint allows you to easily get a page of Records\n      description: This endpoint allows you to get a page of Records. The page may be empty.\n      responses:\n        '200':\n          description: A page of Records, which may be empty.\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  description:\n                    type: string\n                    description: The human-readable description of the Record.\n                  summary:\n                    type: string\n                    description: The summary supplied with the Record.\n              example:\n                description: Keep this example description unchanged.\n                summary: Keep this example summary unchanged.\n      x-source:\n        description: Keep this extension value unchanged.\n",
+      "assertions": [
+        "The summary becomes a concise action phrase and the description states the result directly.",
+        "The page can still be empty; no total count, complete traversal, sort, or snapshot guarantee is introduced.",
+        "Property names description and summary, example payload strings, x-source content, and operationId are identical.",
+        "All parsed changes are strings at approved OpenAPI documentation metadata locations."
+      ]
+    },
+    {
+      "id": "unspecified-behavior",
+      "request": "Make this reference text clearer. Explain only behavior established by the supplied contract, and report gaps separately.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Record API\n  version: 1.0.0\npaths:\n  /records:\n    get:\n      operationId: listRecords\n      summary: Get some data\n      description: Returns a page of Records.\n      parameters:\n        - name: pageSize\n          in: query\n          required: false\n          description: The maximum number of Records requested.\n          schema:\n            type: integer\n            minimum: 1\n            maximum: 100\n      responses:\n        '200':\n          description: A page of Records.\n        '503':\n          description: The service cannot accept work.\n",
+      "assertions": [
+        "The summary names Records rather than generic data.",
+        "No pageSize default, omission behavior, retry delay, retry guarantee, or Retry-After header is invented.",
+        "Review notes distinguish missing default or retry policy from verified behavior; they do not resolve these decisions.",
+        "The existing parameter requiredness, range, response set, and operationId are identical."
+      ]
+    },
+    {
+      "id": "privacy-and-history",
+      "request": "Improve the readability of this operation description without changing status conditions, disclosure, or requirement strength.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: History API\n  version: 1.0.0\npaths:\n  /records/{recordId}/revisions:\n    get:\n      operationId: listRecordRevisions\n      summary: List retained Record revisions\n      description: Return retained source revisions under current authorization. An absent parent Record, a parent outside the collection, and protected parent existence MUST use the same generic 404 response. Only after authorization and protected-existence checks MAY source inability to return retained history use 409. Missing history MUST NOT be fabricated or replaced with current state.\n      parameters:\n        - name: recordId\n          in: path\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Retained revisions.\n        '404':\n          description: Record not available.\n        '409':\n          description: Retained history not available.\n",
+      "assertions": [
+        "Current authorization remains applicable to retained source revisions.",
+        "All three unavailable or protected parent conditions retain the same generic 404 response.",
+        "409 remains permitted only after authorization and protected-existence checks, not mandatory or evaluated first.",
+        "The prohibition on fabricated history and substitution of current state remains explicit.",
+        "MUST, MAY, and MUST NOT keep their original strength and scope."
+      ]
+    },
+    {
+      "id": "temporal-and-continuation",
+      "request": "Edit the description for clearer technical English. Keep the behavior and all qualifications.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Search API\n  version: 1.0.0\npaths:\n  /records/search:\n    post:\n      operationId: searchRecords\n      summary: Execute a declared Record search\n      description: Run one declared search. Omit temporal coordinates to select current state; never substitute current state when selected temporal state is unavailable. Repeat the same search, criteria and pageSize with the cursor. Property order in criteria does not affect equality. A changed selector returns 400 invalid-cursor. Each page applies current authorization. A short or empty page may continue. This read is retryable without an Idempotency-Key.\n      responses:\n        '200':\n          description: A page of matching Records.\n        '400':\n          description: Invalid continuation.\n",
+      "assertions": [
+        "Omission still selects current state and unavailable selected temporal state never falls back to current state.",
+        "Continuation still binds search, criteria and pageSize; JSON property order remains immaterial.",
+        "Changed selectors still return 400 invalid-cursor, and current authorization applies to every page.",
+        "A short or empty page can still continue; no completeness or snapshot guarantee appears.",
+        "The read remains retryable without an Idempotency-Key."
+      ]
+    },
+    {
+      "id": "optional-and-normative",
+      "request": "Improve the wording while retaining the document's RFC keyword convention. This is an editorial pass, not a requirements-model migration.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Status API\n  version: 1.0.0\npaths:\n  /status:\n    get:\n      operationId: getStatus\n      summary: Get status\n      description: The implementation SHOULD include a service label. It MAY omit the label. The label MUST NOT contain internal topology.\n      responses:\n        '200':\n          description: Service status.\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  label:\n                    type: string\n                    description: Optional public service label.\n",
+      "assertions": [
+        "SHOULD, MAY, and MUST NOT remain distinct and apply to the same behavior.",
+        "The label remains an optional schema property; optional is not mechanically changed to RECOMMENDED.",
+        "No REQUIRED classifier, lifecycle status, new requirement identifier, or schema required entry is introduced.",
+        "The topology restriction remains explicit."
+      ]
+    },
+    {
+      "id": "unknown-enum-meaning",
+      "request": "Improve this OpenAPI prose and enum documentation using only the supplied source. Report any meaning that cannot be established.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Check API\n  version: 1.0.0\npaths:\n  /check:\n    get:\n      operationId: checkStatus\n      summary: This endpoint performs a check\n      description: Returns the source status code.\n      responses:\n        '200':\n          description: Source status.\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  status:\n                    type: string\n                    enum: [A, P, X]\n                    description: Source status code; meanings are defined by the source profile.\n",
+      "assertions": [
+        "The summary is concise, and the source-profile dependency is retained.",
+        "No guessed expansions such as active, pending, or expired are assigned to A, P, or X.",
+        "Review notes identify the missing source profile or enum meanings without inserting placeholders into the contract.",
+        "The enum values and schema remain identical."
+      ]
+    },
+    {
+      "id": "current-rights-and-retention",
+      "request": "Shorten this OpenAPI wording where useful. Preserve meaning and report any facts that the supplied contract does not establish.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Revision API\n  version: 1.0.0\npaths:\n  /revisions:\n    get:\n      operationId: listRevisions\n      summary: Get retained source revisions\n      description: The service checks the caller's current disclosure rights before returning each retained source revision. A cached response MAY be reused only when those current rights and the selected source revision remain unchanged. An expired cursor MUST NOT be accepted, even if current authorization succeeds. recordedAt is returned only when source-backed.\n      parameters:\n        - name: cursor\n          in: query\n          required: false\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Retained source revisions.\n",
+      "assertions": [
+        "Current disclosure rights are still checked before returning each retained source revision, rather than generic or cached authorization being sufficient.",
+        "Cached response reuse remains permitted only when both current rights and the selected source revision are unchanged.",
+        "Expired cursors remain prohibited even when current authorization succeeds.",
+        "recordedAt remains conditional on source-backed evidence; no fabricated timestamp or blanket recording-time promise is introduced.",
+        "The MAY and MUST NOT retain their strength and scope, with no invented status codes or schema changes."
+      ]
+    },
+    {
+      "id": "international-reader-context",
+      "request": "Edit the OpenAPI documentation for international technical readers. Preserve behavior, draft status, validation limits, and all machine-readable content.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Record API\n  version: 1.0.0-draft\n  description: This draft API description is for Building Block Software, which implements a Building Block Specification. It is not a published conformance result.\npaths:\n  /records/{recordId}:\n    get:\n      operationId: getRecord\n      summary: Get up to speed with a Record\n      description: This section in this draft explains a cutting-edge endpoint for getting a Record. The operation returns the caller's permitted Record view for recordId. The validator's internal checker reports the shape of the description, not deployed behavior. The source field description and the linked API description are different concepts.\n      parameters:\n        - name: recordId\n          in: path\n          required: true\n          schema:\n            type: string\n      responses:\n        '200':\n          description: Permitted Record view.\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  description:\n                    type: string\n                    description: Text supplied by the source.\n              example:\n                description: Keep the source text as supplied.\n",
+      "assertions": [
+        "The operation summary and prose use direct technical language without the idiom or marketing claim.",
+        "The permitted Record view and its recordId selection are unchanged; no access, existence, completeness, or runtime guarantee is invented.",
+        "The description remains understandable without the surrounding style guide and distinguishes a source description field from the API description.",
+        "Internal checker wording can be simplified, but the distinction between structural validation and deployed behavior remains explicit.",
+        "Draft status and the absence of a published conformance result remain explicit.",
+        "The source example text, property names, operationId, parameters, and response schema remain identical."
+      ]
+    },
+    {
+      "id": "unresolved-reference-ambiguity",
+      "request": "Improve this OpenAPI prose for international technical readers using only the supplied source. Preserve any unresolved behavior and report ambiguities separately.",
+      "input": "openapi: 3.1.0\ninfo:\n  title: Search API\n  version: 1.0.0\npaths:\n  /search:\n    post:\n      operationId: searchRecords\n      summary: Search Records\n      description: Returns matching Records. A request may use name and/or status. If possible, the operation returns all matching Records, etc.\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              type: object\n              properties:\n                name:\n                  type: string\n                status:\n                  type: string\n      responses:\n        '200':\n          description: Matching Records.\n",
+      "assertions": [
+        "The editor does not decide whether the filters combine with AND or OR, require one filter, or forbid both.",
+        "No completeness, pagination, best-effort, or failure guarantee is substituted for the unresolved all-results claim.",
+        "Review notes identify and/or, if possible, and etc. as unresolved meaning rather than treating them as mechanically removable words.",
+        "Ambiguous canonical statements remain unchanged until owning evidence resolves them; the schema and request requiredness are identical."
+      ]
+    },
+    {
+      "id": "multi-file-refs-and-composition",
+      "request": "Improve the human-readable OpenAPI summaries and descriptions in this small API description for international technical readers, starting at openapi.yaml. Follow references from the entry point, including composed schemas and shared components. Preserve the API contract, examples, and repository layout. Return the edited files at their existing relative paths and separate review notes in review-notes.md.",
+      "fixture": {
+        "source_dir": "fixtures/ref-composition",
+        "entrypoint": "openapi.yaml",
+        "deliverables": [
+          "edited fixture files at their existing relative paths",
+          "review-notes.md"
+        ]
+      },
+      "allowlisted_nodes": [
+        "openapi.yaml#/info/description",
+        "paths/records.yaml#/~1records/get/summary",
+        "paths/records.yaml#/~1records/get/description",
+        "paths/records.yaml#/~1records/get/responses/200/description",
+        "paths/records.yaml#/~1records~1{recordId}/get/summary",
+        "paths/records.yaml#/~1records~1{recordId}/get/description",
+        "paths/records.yaml#/~1records~1{recordId}/get/responses/200/description",
+        "components/schemas.yaml#/Record/description",
+        "components/schemas.yaml#/RecordIdentity/description",
+        "components/schemas.yaml#/RecordIdentity/properties/recordId/description",
+        "components/record-content.yaml#/RecordContent/description",
+        "components/record-content.yaml#/RecordContent/properties/description/description",
+        "components/record-content.yaml#/RecordContent/properties/summary/description"
+      ],
+      "assertions": [
+        "The evaluator resolves both external Path Item references, the local RecordIdentity reference, the external RecordContent reference, and the Record allOf composition before deciding which prose is visible.",
+        "Both operations still reference the same Record component. Shared schema prose is edited once at its owning component, without copying, inlining, or diverging it between operations.",
+        "Every parsed value outside allowlisted_nodes is identical, including path templates, methods, operationIds, response codes, references, types, required arrays, and allOf structure.",
+        "The schema property keys description and summary, their example payload keys and strings, recordId example data, and all other example values are identical. Only documentation metadata at allowlisted object locations may change.",
+        "The revised prose remains within the established behavior: list results are permitted Records and may be empty, while a single result is the permitted Record view. It adds no completeness, existence-disclosure, ordering, pagination, or deployment guarantee.",
+        "All four source YAML files remain at their original paths, parse successfully, and retain resolvable relative references. Review notes distinguish editorial verification from runtime conformance."
+      ]
+    }
+  ]
+}

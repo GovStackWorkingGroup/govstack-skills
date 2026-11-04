@@ -1,0 +1,116 @@
+{
+  "skill": "govstack-writing",
+  "purpose": "Repeatable editorial evaluations for international technical readers. Assertions concern meaning and protected artifacts, not exact preferred phrasing.",
+  "method": "For an inline case, give a fresh evaluator only the request and input, plus the skill. For a fixture case, copy the complete fixture.source_dir, relative to this file, into a new scratch directory while preserving its layout, then materialize each fixture.seed_files mapping at that relative path in scratch, creating parent directories as needed. Use the fixture metadata to prepare and collect the run, but give the evaluator only the request, resulting artifact tree, and skill. Do not expose the fixture metadata, allowlisted_files, assertions, or a model answer. Review every assertion against the source; check protected code, anchors, link targets, identifiers, obligations, facts, and repository publication evidence. Do not execute documented commands. Style checks do not establish deployed behavior.",
+  "cases": [
+    {
+      "id": "overview-international-audience",
+      "request": "Rewrite this overview for an international technical audience. Keep the supported scope and publication status.",
+      "input": "# Component overview\n\nThis section provides context for this Building Block. Our cutting-edge solution gets teams up to speed and is a game changer for integrations.\n\nThe Building Block Specification defines a common response format for record reads. Independent Building Block Software implementations use that format. Without a common format, an integrating client needs a different response mapping for each implementation. The specification defines the interface; it does not provide a running service.\n\nThis document is a draft. No deployed conformance result is available.\n",
+      "assertions": [
+        "The overview starts with the technical reader problem or purpose, rather than boilerplate, idioms, or promotional claims.",
+        "The distinction between Building Block Specification and Building Block Software, the common response format, and the client mapping consequence remain accurate.",
+        "The draft status, absence of deployed conformance evidence, and absence of a running service remain explicit.",
+        "No claim of achieved savings, automatic interoperability, certification, or new software functionality is added."
+      ]
+    },
+    {
+      "id": "reference-obligations-and-scope",
+      "request": "Edit this reference prose for clarity without changing obligations, classifiers, identifiers, anchors, or links.",
+      "input": "# Record reads\n\n<a id=\"req-4\"></a>\n## Requirement 4\n\n`REQUIRED IMMUTABLE`\n\nWhen a caller requests a retained revision, the implementation MUST evaluate the caller's current disclosure rights before returning that revision. It MUST NOT substitute current state when the retained revision is unavailable.\n\nThe client MAY retry the request only while its access token remains valid. See [revision selection](#revision-selection).\n\n<a id=\"revision-selection\"></a>\n## Revision selection\n\nThis section describes revision selection. Revision identifiers are source-backed and opaque.\n",
+      "assertions": [
+        "The condition, subject, action, and before-return constraint of Requirement 4 remain explicit.",
+        "Current disclosure rights, retained revision, and the prohibition on substituting current state are preserved.",
+        "MUST, MUST NOT, MAY, and the retry token-validity condition keep their force and scope.",
+        "REQUIRED IMMUTABLE, req-4, revision-selection anchors, and the Markdown link target are identical.",
+        "No new requirement, actor, identifier, or rationale is introduced without evidence."
+      ]
+    },
+    {
+      "id": "how-to-commands-and-verification",
+      "request": "Rewrite this how-to as clear instructions for a technical reader. This is a documentation edit; do not execute its commands.",
+      "input": "# Validate an API description\n\nThe reader should first make sure Node.js and the repository dependencies are available. From the repository root, it is then necessary to run the following command:\n\n```sh\nnode tools/check-api.mjs api/openapi.yaml\n```\n\nAn exit status of 0 means that the configured structural checks pass. It does not demonstrate deployed behavior. If the command reports an error, read its finding and correct the API description before running the command again.\n",
+      "assertions": [
+        "The result uses imperative instructions in the established order, with prerequisites and repository-root context retained.",
+        "The command text is byte-for-byte identical after accounting for Markdown list indentation, and no example command is executed as part of the writing task.",
+        "The success criterion remains exit status 0 for configured structural checks only, with deployed behavior explicitly unverified.",
+        "No dependency version, install command, fix, successful run, or deployment result is invented.",
+        "Tool and file names needed to perform the task are retained despite a general preference against implementation details in reference prose."
+      ]
+    },
+    {
+      "id": "scope-ownership-and-rationale",
+      "request": "Improve the scope explanation using only the established ownership and rationale in the supplied text.",
+      "input": "# Scope\n\nThe scope of this document is about record retrieval. The Consultation API returns permitted record views. The shared authorization policy determines which fields a caller may receive; that policy is owned by the authorization service and is outside this API description.\n\nThe interface returns the same public error for an absent or protected Record. This prevents the response from revealing whether the protected Record exists.\n",
+      "assertions": [
+        "The scope clearly names record retrieval and permitted views.",
+        "The out-of-scope authorization policy and its known owner are retained without inventing a link, another component, or policy mechanics.",
+        "The existing protected-existence rationale remains connected to the shared public error, not broadened into a universal security or legal claim.",
+        "No decision-maker marketing rationale or new API operation is added."
+      ]
+    },
+    {
+      "id": "protect-embedded-openapi-and-literals",
+      "request": "Improve the surrounding Markdown only. Preserve embedded OpenAPI, protocol literals, identifiers, links, and source examples.",
+      "input": "# API reference\n\nThis section provides the API reference. The following is the published illustrative API fragment. It is not a deployed implementation.\n\n```yaml\nopenapi: 3.1.0\ninfo:\n  title: Reference API\n  version: 1.0.0\npaths:\n  /records:\n    get:\n      operationId: getRecords\n      description: Keep this embedded description unchanged.\n      responses:\n        '200':\n          description: Keep this response text unchanged.\n```\n\nUse the `Authorization` header as defined in [the authentication profile](#authentication-profile). The source example value is `03/04/2026`; its interpretation is not specified. Do not infer a calendar date from it.\n\n<a id=\"authentication-profile\"></a>\n## Authentication profile\n\nThe profile is a draft and has no implementation evidence.\n",
+      "assertions": [
+        "The fenced OpenAPI fragment remains byte-for-byte identical; the general writing skill does not revise its description metadata.",
+        "Authorization, operationId getRecords, the authentication-profile anchor, and the Markdown link target remain identical.",
+        "The ambiguous date literal 03/04/2026 is not reformatted or assigned a regional interpretation.",
+        "The draft and illustrative status and lack of deployment evidence are retained.",
+        "Surrounding prose becomes direct without inventing new authentication behavior."
+      ]
+    },
+    {
+      "id": "ambiguity-and-technical-vocabulary",
+      "request": "Edit the text for an international technical audience while preserving established technical meanings. Report any unresolved claims separately.",
+      "input": "# Request processing\n\nThe service authenticates the client certificate before it evaluates the caller's authorization. Authentication and authorization are separate checks. TLS 1.3 is the declared transport version.\n\nIf possible, the service handles all requests, etc. A request may use name and/or status. The source does not define the fallback behavior or whether those filters are conjunctive or disjunctive.\n",
+      "assertions": [
+        "Authentication, authorization, the client certificate, their ordering, and TLS 1.3 remain technically precise.",
+        "The editor does not replace technical concepts with vague synonyms merely to shorten the text.",
+        "The editor does not infer fallback behavior, completeness guarantees, or AND/OR matching semantics.",
+        "Review notes flag the ambiguous phrases and their missing evidence; canonical unresolved statements remain unresolved.",
+        "No region-specific metaphor, local legal assumption, or invented terminology is introduced."
+      ]
+    },
+    {
+      "id": "assessment-evidence-and-requirement",
+      "request": "Rewrite this assessment for international technical readers. Keep the requirement, observation, interpretation, and proposal distinct, without resolving the mismatch.",
+      "input": "# Retained-history assessment\n\n<a id=\"req-7\"></a>\nThe adopted reference requires that when retained history is unavailable, the implementation MUST NOT substitute current state.\n\nA local regression test returned current state when retained history was unavailable. This observation is limited to the local test environment. No production validation has run.\n\nThis suggests a mismatch between the implementation and [the requirement](#req-7). The requirement has not changed. The proposal is to investigate the fallback, then add a regression case only after the owner confirms the cause. No fix has been applied.\n",
+      "assertions": [
+        "The adopted MUST NOT requirement and its unavailable-history condition remain unchanged in meaning.",
+        "The local test result remains observed evidence, not an authorized change to the reference behavior or a deployed conformance result.",
+        "The apparent mismatch remains an interpretation to investigate; no cause, fix, or revised policy is invented.",
+        "Investigation remains proposed, and the regression case remains conditional on owner confirmation after that investigation. No applied fix or production validation is claimed.",
+        "The req-7 anchor and its Markdown link target are preserved."
+      ]
+    },
+    {
+      "id": "publication-inventory-and-working-notes",
+      "request": "Edit docs/registration-guide.md for clear international technical English. This is a wording-only change. Use the supplied repository artifacts to identify the publication boundary, keep the currently selected source format and layout, and return the edited guide at its existing path with separate review notes in review-notes.md. Do not edit other repository files.",
+      "fixture": {
+        "source_dir": "fixtures/publication-boundary",
+        "target": "docs/registration-guide.md",
+        "deliverables": [
+          "docs/registration-guide.md",
+          "review-notes.md"
+        ],
+        "seed_files": {
+          "notes/local-working-note.md": "# Local working note\n\nThis ignored note is not an adopted publication source. A possible future layout could\nsplit the guide into topic pages and replace the current example, but no such decision has\nbeen made.\n"
+        }
+      },
+      "allowlisted_files": [
+        "docs/registration-guide.md"
+      ],
+      "assertions": [
+        "Only prose in docs/registration-guide.md changes. publication-inventory.yaml, CONTRIBUTING.md, .gitignore, and notes/local-working-note.md are byte-for-byte identical.",
+        "The REQ-12 identifier, REQUIRED classifier, MUST obligation, client actor, submission condition, and sourceReference constraint retain their force and scope.",
+        "The registration-request and response-example anchors and their Markdown link targets are identical. The shell command and JSON example, including description and summary keys and values, remain byte-for-byte identical after accounting for unchanged fence indentation.",
+        "The declared single-file-markdown source and output remain in the current paths. No topic-page split, format conversion, new template, or repository-wide layout rule is introduced.",
+        "Review notes use publication-inventory.yaml as the declared publication inventory, recognize CONTRIBUTING.md as public repository-only guidance despite its absence from that inventory, and do not infer that every unlisted public file is private.",
+        "The ignored local working note remains excluded and does not override the adopted guide, requirement, publication inventory, or current layout. Its speculative wording and migration proposal are not copied into the guide.",
+        "The fixture is treated as an example repository with an adopted local format, not evidence that all GovStack repositories require a single-file guide or the same publication inventory schema."
+      ]
+    }
+  ]
+}

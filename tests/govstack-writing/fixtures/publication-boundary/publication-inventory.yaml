@@ -1,0 +1,6 @@
+version: 1
+publications:
+  - id: registration-guide
+    source: docs/registration-guide.md
+    format: single-file-markdown
+    output: registration-guide.md
