@@ -1,0 +1,12 @@
+RecordContent:
+  type: object
+  description: This object provides the human-readable content information for a Record.
+  required:
+    - description
+  properties:
+    description:
+      type: string
+      description: This is the human-readable description which is supplied by the source.
+    summary:
+      type: string
+      description: This is the summary which is supplied by the source when one is available.

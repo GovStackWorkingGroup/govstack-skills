@@ -1,0 +1,18 @@
+Record:
+  description: This is the Record schema which is shared by the list and single-Record operations.
+  allOf:
+    - $ref: '#/RecordIdentity'
+    - $ref: ./record-content.yaml#/RecordContent
+  example:
+    recordId: record-42
+    description: Keep this example description unchanged.
+    summary: Keep this example summary unchanged.
+RecordIdentity:
+  type: object
+  description: This object provides the source Record identity information.
+  required:
+    - recordId
+  properties:
+    recordId:
+      type: string
+      description: This is the identifier supplied by the Record source.

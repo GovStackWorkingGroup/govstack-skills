@@ -1,0 +1,14 @@
+openapi: 3.1.0
+info:
+  title: Record API
+  version: 1.0.0-draft
+  description: This API description is for reading Records that the caller is permitted to view. It is a draft and is not a deployed conformance result.
+paths:
+  /records:
+    $ref: ./paths/records.yaml#/~1records
+  /records/{recordId}:
+    $ref: ./paths/records.yaml#/~1records~1%7BrecordId%7D
+components:
+  schemas:
+    Record:
+      $ref: ./components/schemas.yaml#/Record

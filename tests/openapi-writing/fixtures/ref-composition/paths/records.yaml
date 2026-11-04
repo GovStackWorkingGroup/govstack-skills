@@ -1,0 +1,32 @@
+/records:
+  get:
+    operationId: listRecords
+    summary: This endpoint allows you to easily get Records
+    description: This endpoint allows the caller to get a page of Records that they are permitted to view. The page may be empty.
+    responses:
+      '200':
+        description: A successful page of permitted Records, which may be empty.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: ../components/schemas.yaml#/Record
+/records/{recordId}:
+  get:
+    operationId: getRecord
+    summary: This endpoint allows you to easily get a Record
+    description: This endpoint allows the caller to get the permitted Record view for recordId.
+    parameters:
+      - name: recordId
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: The successful permitted Record view.
+        content:
+          application/json:
+            schema:
+              $ref: ../components/schemas.yaml#/Record
